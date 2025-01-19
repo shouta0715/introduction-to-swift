@@ -42,3 +42,47 @@ var myBrotherValue = "\(myBrother.name) \(myBrother.age) \(myBrother.isMale)"
 var (name, _, isMale) = myBrother
 
 var t = "\(name) \(isMale)"
+
+// condiftion
+
+var age = 20
+var message = ""
+
+if age < 21 {
+    message = "You are not allowed to drink"
+}
+
+var isValide = false
+
+if isValide {
+  message = "Valid"
+} else {
+  message = "Not valid"
+}
+
+var optionalV:Int? = 10
+
+//if optionalV != nil {
+//  let value = optionalV!
+//  let content = "Value is \(value)"
+//}
+
+if let value = optionalV {
+  let content = "Value is \(value)"
+}
+
+
+var myOptional:Int? = 10
+
+if var myOptional {
+  myOptional += 10
+}
+
+// 10
+myOptional
+
+if let value = myOptional , value == 10 {
+  message = "Value is 10"
+
+}
+  
