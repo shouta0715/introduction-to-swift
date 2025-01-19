@@ -1,0 +1,3 @@
+# Swift Playground関連の不要ファイルを除外
+*.xcworkspace
+*.xctimeline
