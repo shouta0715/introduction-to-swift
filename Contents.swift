@@ -86,3 +86,67 @@ if let value = myOptional , value == 10 {
 
 }
   
+// Switch
+
+var myValue = 10
+
+switch myValue {
+case 1:
+  message = "Value is 1"
+case 2:
+  message = "Value is 2"
+default:
+  message = "Value is \(myValue)"
+}
+
+
+switch myValue {
+case 1, 2:
+  message = "Value is 1"
+default:
+  message = "Value is \(myValue)"
+}
+
+let numberTuple = (10, 20)
+
+switch numberTuple {
+case (10, 20):
+  message = "Value is 10, 20"
+default:
+  message = "Value is \(numberTuple)"
+}
+
+let numberTuple2 = (10, 20)
+
+switch numberTuple2 {
+  case let (x,y) where x > y:
+    message = "x is greater than y"
+  case let (x,y) where x < y:
+    message = "x is less than y"
+  default:
+    message = "x is equal to y"
+    
+}
+
+switch numberTuple2 {
+case  (5,20):
+    message = "x is greater than y"
+case (10,20):
+    message = "x is less than y"
+  default:
+    message = "x is equal to y"
+    
+}
+
+
+  
+
+var switchValue: () = switch numberTuple2 {
+case  (_,20):
+    message = "x is greater than y"
+case (10,20):
+    message = "x is less than y"
+  
+  default:
+  message = "x is equal to y"
+}
