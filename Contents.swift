@@ -150,3 +150,31 @@ case (10,20):
   default:
   message = "x is equal to y"
 }
+
+// loop
+var counter = 0
+
+while counter < 10 {
+  counter += 1
+}
+
+repeat {
+  counter += 1
+} while counter < 10
+
+var text = "Hello"
+
+message = ""
+for char in text {
+  message += message != "" ? "_" : " "
+  message += "\(char)"
+
+}
+
+var text2 = "Hello"
+
+for letter in text2 where letter != "e" {
+  message += "\(letter)"
+
+}
+  
