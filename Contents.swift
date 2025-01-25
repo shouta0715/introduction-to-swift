@@ -23,3 +23,21 @@ func second(value: inout Int) {
 myNumber = 10
 
 second(value: &myNumber)
+
+func getDescription(value:Int)->String {
+  let message = "The number is \(value)"
+  
+  return message
+}
+
+func getDescription(value:String)->String {
+  let message = "The string is \(value)"
+  
+  return message
+}
+
+func genericFunction<T>(value:T)->String {
+  let message = "The value is \(value)"
+  
+  return message
+}
