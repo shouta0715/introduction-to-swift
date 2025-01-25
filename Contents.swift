@@ -41,3 +41,16 @@ func genericFunction<T>(value:T)->String {
   
   return message
 }
+
+
+let aboutNumber = abs(-5)
+
+let sequenceText = repeatElement("Hello", count: 5)
+let squencesNumber = stride(from: 0, to: 10, by: 2)
+let finalSequence = zip(sequenceText, squencesNumber)
+
+for (text, number) in finalSequence {
+  let message = "\(text) \(number)"
+  
+  print(message)
+}
