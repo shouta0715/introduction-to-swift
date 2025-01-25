@@ -54,3 +54,28 @@ for (text, number) in finalSequence {
   
   print(message)
 }
+
+let myaddtion = { () -> Int in
+  return 5 + 5
+}()
+
+
+let multi = { (number:Int, time:Int) -> Int in
+  return number * time
+}
+
+let result = multi(5, 5)
+
+func processFunction(myClosure:(Int,Int)->Int) -> Int {
+  let total = myClosure(5, 5)
+  
+  return total
+}
+
+let total = processFunction() { (number, time) in
+  return number * time + 5
+}
+
+
+
+
