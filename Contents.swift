@@ -1,40 +1,25 @@
-
-struct Item {
-  var name: String = "Not Defined"
-  var price: Double = 0.0
-  
-  func totalPrice(quantity: Int) -> Double {
-    price * Double(quantity)
-  }
-  
-  mutating func changeName(newName: String) {
-    name = newName
-  }
-}
-
 struct Price {
-  var USD: Double
-  var CAD: Double
+  var increment: Double = 0
+  var oldprice: Double = 0
   
-  var canadians: Double {
-    get {USD * 1.25}
-    set {USD = newValue / 1.25}
-  }
-  
-  init(americans: Double) {
-    USD = americans
-    CAD = americans * 1.25
-  }
-  
-  init(canadians: Double) {
-    CAD = canadians
-    USD = canadians / 1.25
+  var price: Double {
+    willSet {
+      increment = newValue - oldprice
+    }
+    didSet {
+      oldprice = oldValue
+    }
   }
 }
 
-var price: Price = .init(canadians: 100)
-var item: Item = .init(name: "Shoes", price: price.USD)
+var product = Price(price: 100)
+
+product.price = 200
+
+"new price: \(product.price), increment: \(product.increment) , oldprice \(product.oldprice)"
+ 
 
 
-var totalPrice = item.totalPrice(quantity: 2)
+product.price = 300
 
+"new price: \(product.price), increment: \(product.increment) , oldprice \(product.oldprice)"
