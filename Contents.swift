@@ -1,81 +1,46 @@
-func muFunction(number:Int) -> Int {
-    return number * 2
+// 1. Value Types
+
+struct Item {
+  var name:String = "Not Set"
+  var prive:Double = 0
 }
 
-var myNumber = 5
-
-myNumber = muFunction(number: myNumber)
-
-
-
-func doubleFuction(number:Int) -> Int {
-  number * 2
-}
-
-myNumber = 5
-
-myNumber = doubleFuction(number: myNumber)
-
-
-func second(value: inout Int) {
-  value = value * 2
-}
-myNumber = 10
-
-second(value: &myNumber)
-
-func getDescription(value:Int)->String {
-  let message = "The number is \(value)"
-  
-  return message
-}
-
-func getDescription(value:String)->String {
-  let message = "The string is \(value)"
-  
-  return message
-}
-
-func genericFunction<T>(value:T)->String {
-  let message = "The value is \(value)"
-  
-  return message
+class Item2 {
+  var name:String = "Not Set"
+  var prive:Double = 0
 }
 
 
-let aboutNumber = abs(-5)
+var purchase = Item()
+var classPurchase = Item2()
 
-let sequenceText = repeatElement("Hello", count: 5)
-let squencesNumber = stride(from: 0, to: 10, by: 2)
-let finalSequence = zip(sequenceText, squencesNumber)
+purchase.name = "Laptop"
+purchase.prive = 1299.99
 
-for (text, number) in finalSequence {
-  let message = "\(text) \(number)"
-  
-  print(message)
-}
+classPurchase.name = "Laptop"
+classPurchase.prive = 1299.99
 
-let myaddtion = { () -> Int in
-  return 5 + 5
-}()
+var purchase2 = purchase
+var classPurchase2 = classPurchase
 
+purchase2.name = "Headphones"
+purchase2.prive = 299.99
 
-let multi = { (number:Int, time:Int) -> Int in
-  return number * time
-}
+classPurchase2.name = "Headphones"
+classPurchase2.prive = 299.99
 
-let result = multi(5, 5)
+"Purchase: \(purchase.name) for $\(purchase.prive)"
+"Purchase2: \(purchase2.name) for $\(purchase2.prive)"
 
-func processFunction(myClosure:(Int,Int)->Int) -> Int {
-  let total = myClosure(5, 5)
-  
-  return total
-}
-
-let total = processFunction() { (number, time) in
-  return number * time + 5
-}
+"Class Purchase: \(classPurchase.name) for $\(classPurchase.prive)"
+"Class Purchase2: \(classPurchase2.name) for $\(classPurchase2.prive)"
 
 
+var purchase3 = Item()
+
+let itemKeyPath = \Item.name
 
 
+let itemName = purchase3[keyPath: itemKeyPath]
+
+"Item name: \(itemName)"
