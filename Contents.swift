@@ -1,33 +1,76 @@
 
-var list:[String: String] = ["name": "John", "country": "USA", "age": "25"]
-
-var list2 = list
-
-list["name"] = "Tom"
-
-list
-list2
-
-
-
-
-for (key, value) in list {
-  let message = "Key: \(key), Value: \(value)"
+enum Number {
+  case one, two, three
   
-  print(message)
+  func getMessage() -> String {
+    switch self {
+    case .one:
+      return "one message"
+    case .two:
+      return "two message"
+    case .three:
+      return "three message"
+    }
+  }
 }
 
-let group = Dictionary(grouping: ["one", "two", "three", "four", "five"]) {
-  $0.first!
+let one = Number.one
+let two = Number.two
+let three = Number.three
+
+let mynumber = Number.one
+
+switch mynumber {
+  case .one:
+    print("one")
+  case .two:
+    print("two")
+  case .three:
+    print("three")
+  
+  
 }
 
-var numbers: [String: Int] = [
-  "one": 1,
-  "two": 2,
-  "three": 3,
-  "four": 4,
-  "five": 5
-]
 
-numbers.sorted(by: { $0.value < $1.value })
+enum Number2: String {
+  case one = "one"
+  case two = "two"
+  case three = "three"
+}
 
+let mynumber2 = Number2.one
+let rawValue = mynumber2.rawValue
+
+mynumber.getMessage()
+
+enum MyCharacters {
+  case number(Int, String)
+  case letter(Character, String)
+  
+  init?(rawValue: Int) {
+    switch rawValue {
+    case ...9:
+      self = .number(rawValue, "number")
+    default:
+      self = .letter("A", "letter")
+    }
+  }
+}
+
+var char = MyCharacters.number(1, "one")
+
+let res:String = switch char {
+  case .number(1, "one"):
+    "number"
+  case .number(let value, let description):
+    "number: \(value) - \(description)"
+  case .letter(let letter, let description):
+    "letter: \(letter) - \(description)"
+}
+
+if case .number(1, "one") = char {
+  let message = "number"
+    
+}
+
+let n = Number2(rawValue:   "one")
