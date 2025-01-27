@@ -1,35 +1,33 @@
-var list: [Int] = [1, 2, 3, 4, 5]
+
+var list:[String: String] = ["name": "John", "country": "USA", "age": "25"]
+
+var list2 = list
+
+list["name"] = "Tom"
+
+list
+list2
 
 
-for (index, value) in list.enumerated() {
-  let message = "Item \(index + 1): \(value)"
+
+
+for (key, value) in list {
+  let message = "Key: \(key), Value: \(value)"
   
   print(message)
 }
 
-list.removeAll { Int in
-  return Int % 2 == 0
+let group = Dictionary(grouping: ["one", "two", "three", "four", "five"]) {
+  $0.first!
 }
 
-let half = list.map { $0 / 2 }
+var numbers: [String: Int] = [
+  "one": 1,
+  "two": 2,
+  "three": 3,
+  "four": 4,
+  "five": 5
+]
 
-var list3:Array<Array<Int>> = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
-
-let toatl = list.reduce(0, +)
-
-var ages:Set<Int> = [1, 2, 3, 4, 1]
-
-let names:Set<String> = ["A", "B", "C", "D"]
-
-for age in ages {
-  let message = "Age: \(age)"
-  ages.insert(5)
-  let removed = ages.remove(5)
-  
-  print(message)
-}
-
-let isContains = names.contains("A")
-
-let sorted = names.sorted()
+numbers.sorted(by: { $0.value < $1.value })
 
