@@ -1,27 +1,23 @@
+
 class Employee {
-  var name: String
-  var age: Int
+  var hoge = 0
+  lazy var name: String = {
+    // 呼び出したタイミングで初期化処理が実行される
+    let loadingMessage = "Loading name..."
+    
+    print(loadingMessage)
+    hoge += 1
+    return "John Doe"
+  }()
   
-  init(name: String, age: Int) {
-    self.name = name
-    self.age = age
-  }
+  public private(set) var age: Int = 0
   
-  convenience init(name: String) {
-    self.init(name: name, age: 0)
-  }
-  
-  convenience init() {
-    self.init(name: "un",age: 0)
-  }
-  
-  deinit {
-    let message = "\(name) is being removed from memory!"
-    print(message)
-  }
 }
 
-var employee:Employee? = Employee(name: "John", age: 30)
-let employee2 = Employee()
+let employee = Employee()
+employee.hoge
+employee.name
+employee.hoge
 
-employee = nil
+//Error: Cannot assign to property: 'age' setter is inaccessible
+//employee.age = 30
