@@ -14,7 +14,14 @@ class Employee {
   convenience init() {
     self.init(name: "un",age: 0)
   }
+  
+  deinit {
+    let message = "\(name) is being removed from memory!"
+    print(message)
+  }
 }
 
-let employee = Employee(name: "John", age: 30)
+var employee:Employee? = Employee(name: "John", age: 30)
 let employee2 = Employee()
+
+employee = nil
