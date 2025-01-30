@@ -1,45 +1,53 @@
-
-protocol Pinter {
-  var name:String { get }
-  func printDescription()
-}
-
-struct Employee: Pinter {
+struct Employee: Equatable {
   var name: String
   var age: Int
   
-  func printDescription() {
-      let message = "Employee name is \(name) and age is \(age)"
-    
-    print(message)
-  }
+//  static func == (lhs: Employee, rhs: Employee) -> Bool {
+//    return lhs.age == rhs.age
+//  }
 }
 
-struct Student: Pinter {
+let employee1 = Employee(name: "John", age: 30)
+let employee2 = Employee(name: "John12", age: 30)
+
+let isEqual = employee1 == employee2
+
+func calculateResutl<T:Numeric>(a: T, b: T) -> T {
+  let result = a + b
+  
+  return result
+}
+
+calculateResutl(a: 2, b: 3)
+
+struct comparaEmployee:Comparable {
+  
+  static func < (lhs: comparaEmployee, rhs: comparaEmployee) -> Bool {
+    return lhs.age < rhs.age
+  }
+  
   var name: String
+  var age: Int
+}
+
+let employee3 = comparaEmployee(name: "John", age: 30)
+let employee4 = comparaEmployee(name: "John12", age: 342)
+
+let isLess = employee3 < employee4
+
+
+struct HashEmployee: Hashable {
+  var name: String
+  var age: Int
   
-  func printDescription() {
-    let message = "Student name is \(name)"
-      print(message)
+  func hash(into hasher: inout Hasher) {
+    hasher.combine(age)
   }
 }
-
-let list:[Pinter] = [Employee(name: "John", age: 30), Student(name: "Smith")]
-
-for item in list {
-  item.printDescription()
-}
-
-func getFile(id:Int) ->Pinter {
-  var data:Pinter
-  if id == 1 {
-    data = Employee(name: "John", age: 30)
-  } else {
-    data = Student(name: "Smith")
-  }
   
-  return data
-}
 
-let data = getFile(id: 1)
+let employee5 = HashEmployee(name: "John", age: 30)
 
+let hashValue = employee5.hashValue
+
+  
