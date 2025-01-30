@@ -1,42 +1,23 @@
-// Created by: Tjark Ziehm
-enum Errors: Error {
-  case outOfStock
-}
-    
+@propertyWrapper
+struct Clamped<Value: Comparable> {
+    private var value: Value
+    private let range: ClosedRange<Value>
 
-struct Stock {
-  var totalLamps = 5
-  
-  mutating func sold(amount: Int) -> Result<Int, Errors> {
-    guard totalLamps >= amount else {
-      return .failure(Errors.outOfStock)
+    var wrappedValue: Value {
+        get { value }
+        set { value = min(max(newValue, range.lowerBound), range.upperBound) }
     }
-    return .success(Int(totalLamps - amount))
-  }
+
+    init(wrappedValue: Value, _ range: ClosedRange<Value>) {
+        self.range = range
+        self.value = min(max(wrappedValue, range.lowerBound), range.upperBound)
+    }
 }
-  
 
-
-var stock = Stock()
-
-let result = stock.sold(amount: 3)
-
-
-//switch result {
-//case .success(let stock):
-//  print("Stock left: \(stock)")
-//case .failure(let error):
-//  if error == .outOfStock {
-//    print("Sorry, we are out of stock")
-//  } else {
-//    print("An unknown error occured")
-//  }
-//}
-
-do {
-  let stock = try result.get()
-  print("Stock left: \(stock)")
-} catch Errors.outOfStock {
-//  そのままエラーを投げる
-  throw Errors.outOfStock  
+struct Player {
+    @Clamped(0...100) var health: Int = 50
 }
+
+var player = Player()
+player.health = 150
+print(player.health) // 100（範囲を超えたので最大値に制限）
