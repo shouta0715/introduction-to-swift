@@ -1,53 +1,70 @@
-struct Employee: Equatable {
-  var name: String
-  var age: Int
-  
-//  static func == (lhs: Employee, rhs: Employee) -> Bool {
-//    return lhs.age == rhs.age
-//  }
+protocol Pinter {
+  var name: String { get }
 }
 
-let employee1 = Employee(name: "John", age: 30)
-let employee2 = Employee(name: "John12", age: 30)
-
-let isEqual = employee1 == employee2
-
-func calculateResutl<T:Numeric>(a: T, b: T) -> T {
-  let result = a + b
-  
-  return result
-}
-
-calculateResutl(a: 2, b: 3)
-
-struct comparaEmployee:Comparable {
-  
-  static func < (lhs: comparaEmployee, rhs: comparaEmployee) -> Bool {
-    return lhs.age < rhs.age
-  }
-  
-  var name: String
-  var age: Int
-}
-
-let employee3 = comparaEmployee(name: "John", age: 30)
-let employee4 = comparaEmployee(name: "John12", age: 342)
-
-let isLess = employee3 < employee4
-
-
-struct HashEmployee: Hashable {
-  var name: String
-  var age: Int
-  
-  func hash(into hasher: inout Hasher) {
-    hasher.combine(age)
+extension Pinter {
+  func descriptopm() {
+    let message = "My name is \(name)"
+    
+    print(message)
   }
 }
+
+struct Employee: Pinter {
+  var name: String
+}
+
+let employee = Employee(name: "John")
+employee.descriptopm()
+
+
+
+extension Int {
+  func printInt() {
+   let value = "Value is \(self)"
+    
+    print(value)
+  }
+}
+
+let number = 10
+
+number.printInt()
+
+struct User<T> {
+  var value: T
+}
+
+extension User where T == Int {
+  var valueInt: Int {
+    return value
+  }
+  func printValue() {
+    let message = "Value is \(value)"
+    
+    print(message)
+  }
+}
+  
   
 
-let employee5 = HashEmployee(name: "John", age: 30)
+let user = User(value: 10)
+let user2 = User(value: "Hello")
 
-let hashValue = employee5.hashValue
 
-  
+user.printValue()
+//user2.printValue()
+
+
+extension String.StringInterpolation {
+  mutating func appendInterpolation(_ value: Int) {
+    let fahrenheit = Double(value) * 9 / 5 + 32
+    appendLiteral(String(fahrenheit) + "°F")
+  }
+}
+
+let value = 10
+
+let stringV = "Value is \(value)"
+
+
