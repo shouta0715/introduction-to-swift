@@ -1,41 +1,32 @@
-
-protocol SalaryDelegate {
-  func showMoney(name:String, money:Double)
+// Created by: Tjark Ziehm
+enum Errors: Error {
+  case outOfStock
 }
-
-struct Sarary: SalaryDelegate {
-  func showMoney(name:String, money:Double) {
-    let message = "\(name) has \(money) dollars"
     
-    print(message)
-  }
-}
 
-struct Salary2: SalaryDelegate {
-  func showMoney(name: String, money: Double) {
-    let message = "\(name) has \(money) dollars 2"
-    
-    print(message)
-  }
-}
-
-struct Employee {
-  var name: String
-  var money: Double
+struct Stock {
+  var totalLamps = 5
   
-  var delegate: SalaryDelegate
-  
-  func generateReport() {
-    delegate.showMoney(name: name, money: money)
+  mutating func sold(amount: Int) throws {
+    if totalLamps < amount {
+        throw Errors.outOfStock
+    } else {
+      totalLamps -= amount
+    }
   }
-    
+}
+  
+
+
+var stock = Stock()
+
+do {
+  try stock.sold(amount: 10)
+} catch Errors.outOfStock {
+  let error = Errors.outOfStock
+  let message = "Sorry, we only have \(stock.totalLamps) lamps left."
+  
+  print("\(error): \(message)")
 }
 
-let sarary = Sarary()
-let employee = Employee(name: "John", money: 1000, delegate: sarary)
-
-let sarary2 = Salary2()
-let employee2 = Employee(name: "John", money: 1000, delegate: sarary2)
-
-employee.generateReport()
-employee2.generateReport()
+try? stock.sold(amount: 10)
