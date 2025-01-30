@@ -1,23 +1,45 @@
 
-class Employee {
-  var hoge = 0
-  lazy var name: String = {
-    // 呼び出したタイミングで初期化処理が実行される
-    let loadingMessage = "Loading name..."
-    
-    print(loadingMessage)
-    hoge += 1
-    return "John Doe"
-  }()
-  
-  public private(set) var age: Int = 0
-  
+protocol Pinter {
+  var name:String { get }
+  func printDescription()
 }
 
-let employee = Employee()
-employee.hoge
-employee.name
-employee.hoge
+struct Employee: Pinter {
+  var name: String
+  var age: Int
+  
+  func printDescription() {
+      let message = "Employee name is \(name) and age is \(age)"
+    
+    print(message)
+  }
+}
 
-//Error: Cannot assign to property: 'age' setter is inaccessible
-//employee.age = 30
+struct Student: Pinter {
+  var name: String
+  
+  func printDescription() {
+    let message = "Student name is \(name)"
+      print(message)
+  }
+}
+
+let list:[Pinter] = [Employee(name: "John", age: 30), Student(name: "Smith")]
+
+for item in list {
+  item.printDescription()
+}
+
+func getFile(id:Int) ->Pinter {
+  var data:Pinter
+  if id == 1 {
+    data = Employee(name: "John", age: 30)
+  } else {
+    data = Student(name: "Smith")
+  }
+  
+  return data
+}
+
+let data = getFile(id: 1)
+
