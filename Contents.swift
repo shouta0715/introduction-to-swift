@@ -1,11 +1,27 @@
 import Foundation
 
 
-var length = Measurement(value: 100, unit: UnitLength.meters)
-var width = Measurement(value: 5, unit: UnitLength.kilometers)
+Timer.scheduledTimer(withTimeInterval: 5.0, repeats: false) { timer in
+    let message = "Hello, World!"
+    
+    print(message)
+}
 
-let total = (length + width).converted(to: .kilometers)
+nonisolated(unsafe) var counter = 0
 
-length.converted(to: .kilometers)
+func startTimer() {
+  Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { ref in
+    report(t: ref)
+  }
+}
 
-length.formatted(.measurement(width: .wide, usage: .person))
+func report(t: Timer) {
+  print("Timer fired!")
+  counter += 1
+  if counter >= 5 {
+    let message = "Five seconds have passed!"
+    t.invalidate()
+  }
+}
+
+startTimer()
