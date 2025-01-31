@@ -1,27 +1,35 @@
 import Foundation
 
 
-Timer.scheduledTimer(withTimeInterval: 5.0, repeats: false) { timer in
-    let message = "Hello, World!"
-    
-    print(message)
+let message = "Name: John Doe"
+
+let regex = /Name:\s+[a-zA-Z]+ [a-zA-Z]+/
+
+if let match = message.firstMatch(of: regex) {
+  let found = match.output
+  
+  print("Found: \(found)")
 }
 
-nonisolated(unsafe) var counter = 0
 
-func startTimer() {
-  Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { ref in
-    report(t: ref)
-  }
+
+let matches = message.matches(of: regex)
+
+if !matches.isEmpty {
+  let names = matches.map { $0.output }
+  
+  let list = names.joined(separator: ", ")
+  print("Found: \(list)")
 }
 
-func report(t: Timer) {
-  print("Timer fired!")
-  counter += 1
-  if counter >= 5 {
-    let message = "Five seconds have passed!"
-    t.invalidate()
-  }
-}
+let m = """
+Apple
+Banana
+Cherry
+Date
+"""
 
-startTimer()
+let separator = /\n/
+
+let results = m.replacing(separator, with: ", ")
+
